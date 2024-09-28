@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "160374676664",
+    "project_id": "gustosa-66729",
+    "storage_bucket": "gustosa-66729.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:160374676664:android:dd5ddf662fd8e8af4a284d",
+        "android_client_info": {
+          "package_name": "com.example.gustosa"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsVQk3Cf9HVfF9v3o_oeqoVr4VWn0-gpY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
