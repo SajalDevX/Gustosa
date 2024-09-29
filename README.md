@@ -1,6 +1,6 @@
 # Gustosa
 
-![Gustosa Logo](path_to_your_logo_image) <!-- Adjust path accordingly -->
+![Gustosa Logo](download.png) <!-- Adjust path accordingly -->
 
 Gustosa is a food ordering app designed to provide a seamless experience for ordering food from your college mess and local restaurants, including options for late-night orders. With a user-friendly interface and robust backend, Gustosa aims to satisfy your cravings anytime, anywhere.
 
