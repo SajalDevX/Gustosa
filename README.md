@@ -1,16 +1,30 @@
-# gustosa
+# Gustosa
 
-A new Flutter project.
+![Gustosa Logo](path_to_your_logo_image)
 
-## Getting Started
+Gustosa is a food ordering app designed to provide a seamless experience for ordering food from your college mess and local restaurants, including options for late-night orders. With a user-friendly interface and robust backend, Gustosa aims to satisfy your cravings anytime, anywhere.
 
-This project is a starting point for a Flutter application.
+## Features
 
-A few resources to get you started if this is your first Flutter project:
+- **Order from College Mess**: Easily place orders from your college mess.
+- **Explore Local Restaurants**: Browse and order from a variety of restaurants outside your college.
+- **Late Night Orders**: Enjoy food delivery even during late-night hours.
+- **User Authentication**: Secure login and registration through Firebase.
+- **Real-time Updates**: Get real-time updates on your order status.
+- **Multiplatform Support**: Built with Dart and Flutter for a smooth experience across different devices.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Technology Stack
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+| Technology | Logo |
+|------------|------|
+| **Flutter** | ![Flutter](https://upload.wikimedia.org/wikipedia/commons/1/17/Flutter_logo.png) |
+| **Dart** | ![Dart](https://upload.wikimedia.org/wikipedia/commons/8/8b/Dart-logo.png) |
+| **Firebase** | ![Firebase](https://firebase.google.com/images/brand-guidelines/logo-logomark.png) |
+
+## Installation
+
+To get started with Gustosa, follow these steps:
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/gustosa.git
