@@ -1,6 +1,6 @@
 # Gustosa
 
-![Gustosa Logo](path_to_your_logo_image)
+![Gustosa Logo](path_to_your_logo_image) <!-- Adjust path accordingly -->
 
 Gustosa is a food ordering app designed to provide a seamless experience for ordering food from your college mess and local restaurants, including options for late-night orders. With a user-friendly interface and robust backend, Gustosa aims to satisfy your cravings anytime, anywhere.
 
@@ -17,9 +17,9 @@ Gustosa is a food ordering app designed to provide a seamless experience for ord
 
 | Technology | Logo |
 |------------|------|
-| **Flutter** | ![Flutter](https://upload.wikimedia.org/wikipedia/commons/1/17/Flutter_logo.png) |
-| **Dart** | ![Dart](https://upload.wikimedia.org/wikipedia/commons/8/8b/Dart-logo.png) |
-| **Firebase** | ![Firebase](https://firebase.google.com/images/brand-guidelines/logo-logomark.png) |
+| **Flutter** | <img src="https://upload.wikimedia.org/wikipedia/commons/1/17/Flutter_logo.png" alt="Flutter" width="50"/> |
+| **Dart** | <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/Dart-logo.png" alt="Dart" width="50"/> |
+| **Firebase** | <img src="https://firebase.google.com/images/brand-guidelines/logo-logomark.png" alt="Firebase" width="50"/> |
 
 ## Installation
 
