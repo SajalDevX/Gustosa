@@ -17,8 +17,8 @@ Gustosa is a food ordering app designed to provide a seamless experience for ord
 
 | Technology | Logo |
 |------------|------|
-| **Flutter** | <img src="https://upload.wikimedia.org/wikipedia/commons/1/17/Flutter_logo.png" alt="Flutter" width="50"/> |
-| **Dart** | <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/Dart-logo.png" alt="Dart" width="50"/> |
+| **Flutter** | <img src="https://flutter.dev/assets/images/shared/brand/flutter/logo/flutter-lockup.png" alt="Flutter" width="50"/> |
+| **Dart** | <img src="https://dart.dev/assets/images/dart-logo.svg" alt="Dart" width="50"/> |
 | **Firebase** | <img src="https://firebase.google.com/images/brand-guidelines/logo-logomark.png" alt="Firebase" width="50"/> |
 
 ## Installation
