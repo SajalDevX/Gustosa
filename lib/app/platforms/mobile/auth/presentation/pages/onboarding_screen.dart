@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gustosa/app/platforms/mobile/auth/presentation/pages/AuthPage.dart';
 
 import '../components/ColoredButton.dart';
 
@@ -16,7 +15,7 @@ class OnBoardingScreen extends StatelessWidget {
         context,
         PageRouteBuilder(
           pageBuilder: (context, animation, secondaryAnimation) {
-            return  AuthPage();
+            return  Placeholder();
           },
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             const begin = Offset(0.0, 1.0);
