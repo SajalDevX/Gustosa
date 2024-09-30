@@ -5,12 +5,11 @@ import 'package:get_it/get_it.dart';
 import 'package:gustosa/app/platforms/mobile/auth/presentation/pages/onboarding_screen.dart';
 import 'app/platforms/mobile/auth/presentation/bloc/AuthBloc.dart';
 import 'app/platforms/mobile/auth/presentation/bloc/AuthEvent.dart';
-import 'app/shared/core/inject_dependency/DependencyInjection.dart';
+import 'app/shared/core/inject_dependency/dependencies.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  init();
   runApp(MyApp());
 }
 
