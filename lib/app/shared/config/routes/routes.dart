@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:gustosa/app/platforms/mobile/auth/presentation/pages/agent_sign_up.dart';
+import 'package:gustosa/app/platforms/mobile/auth/presentation/pages/email_verification.dart';
+import 'package:gustosa/app/platforms/mobile/auth/presentation/pages/main_page.dart';
+import 'package:gustosa/app/platforms/mobile/auth/presentation/pages/otp_verification.dart';
+import 'package:gustosa/app/platforms/mobile/home/presentation/bloc/pages/agent_home.dart';
+import 'package:gustosa/app/platforms/mobile/home/presentation/bloc/pages/home.dart';
+import 'package:gustosa/app/platforms/mobile/splash/presentation/pages/splash.dart';
 
 class AppRoutes {
   static const String initial = '/';
@@ -35,9 +42,8 @@ class NavigationManager {
     AppRoutes.initial: (context) => const SplashPage(),
     AppRoutes.splash: (context) => const SplashPage(),
     AppRoutes.mainAuth: (context) => const MainAuthPage(),
-    AppRoutes.newTutorial: (context) => const NewTutorialPage(),
+    // AppRoutes.newTutorial: (context) => const NewTutorialPage(),
     AppRoutes.agentSignUp: (context) => const AgentSignUpPage(),
-    AppRoutes.agentCategories: (context) => const AgentCategoriesPage(),
     AppRoutes.emailVerification: (context) => const EmailVerificationPage(),
     AppRoutes.otpVerification: (context) => const OtpVerificationPage(),
     AppRoutes.home: (context) => const HomePage(),

@@ -1,7 +1,7 @@
 import 'package:either_dart/either.dart';
 import 'package:gustosa/app/shared/core/error_handler/error_state.dart';
 
-import '../../../../../shared/config/constants/enums.dart';
+import 'package:gustosa/app/shared/config/constants/enums.dart';
 import '../entities/agent_model.dart';
 import '../entities/user_model.dart';
 

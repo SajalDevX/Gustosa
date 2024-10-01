@@ -1,7 +1,7 @@
 import 'package:hive_flutter/adapters.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../../../../shared/config/constants/enums.dart';
+import 'package:gustosa/app/shared/config/constants/enums.dart';
 
 part 'agent_model.g.dart';
 

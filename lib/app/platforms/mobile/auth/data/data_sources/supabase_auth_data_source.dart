@@ -1,4 +1,4 @@
-import '../../../../../shared/config/constants/enums.dart';
+import 'package:gustosa/app/shared/config/constants/enums.dart';
 import '../../domain/entities/agent_model.dart';
 import '../../domain/entities/user_model.dart';
 

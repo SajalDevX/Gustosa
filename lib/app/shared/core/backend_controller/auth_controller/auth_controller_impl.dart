@@ -5,11 +5,13 @@ import 'package:either_dart/either.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fa;
 import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:gustosa/app/platforms/mobile/auth/presentation/bloc/auth_bloc/bloc.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../config/constants/secrets.dart';
 import '../../error_handler/error_state.dart';
+import '../../inject_dependency/dependencies.dart';
 
 part 'auth_controller.dart';
 
@@ -113,10 +115,10 @@ class AuthControllerImpl extends AuthController {
           print('Verification failed: ${e.message}');
         },
         codeSent: (String verificationId, int? resendToken) {
-          sl<AuthPageBloc>().setVerificationId(verificationId);
+          sl<AuthBloc>().setVerificationId(verificationId);
         },
         codeAutoRetrievalTimeout: (String verificationId) {
-          sl<AuthPageBloc>().setVerificationId(verificationId);
+          sl<AuthBloc>().setVerificationId(verificationId);
         },
       );
     } catch (e) {

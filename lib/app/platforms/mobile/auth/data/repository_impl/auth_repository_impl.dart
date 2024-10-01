@@ -1,11 +1,13 @@
+
+
 import 'package:either_dart/either.dart';
-import '../../../../../shared/config/constants/enums.dart';
-import '../../../../../shared/core/error_handler/error_state.dart';
-import '../../../../../shared/core/error_handler/error_handler.dart';
-import '../../domain/entities/agent_model.dart';
-import '../../domain/entities/user_model.dart';
-import '../../domain/repository/auth_repository.dart';
-import '../data_sources/supabase_auth_data_source_impl.dart';
+import 'package:gustosa/app/platforms/mobile/auth/data/data_sources/supabase_auth_data_source_impl.dart';
+import 'package:gustosa/app/platforms/mobile/auth/domain/entities/agent_model.dart';
+import 'package:gustosa/app/platforms/mobile/auth/domain/entities/user_model.dart';
+import 'package:gustosa/app/platforms/mobile/auth/domain/repository/auth_repository.dart';
+import 'package:gustosa/app/shared/core/error_handler/error_handler.dart';
+import 'package:gustosa/app/shared/core/error_handler/error_state.dart';
+import 'package:gustosa/app/shared/config/constants/enums.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final SupabaseAuthDataSourceImpl authPageSupabaseDataSource;

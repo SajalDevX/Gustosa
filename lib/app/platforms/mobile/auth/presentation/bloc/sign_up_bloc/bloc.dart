@@ -1,6 +1,6 @@
 
+
 import 'dart:async';
-import 'dart:typed_data';
 
 import 'package:equatable/equatable.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -9,23 +9,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:gustosa/app/platforms/mobile/auth/domain/entities/agent_model.dart';
+import 'package:gustosa/app/platforms/mobile/auth/domain/entities/user_model.dart';
+import 'package:gustosa/app/platforms/mobile/auth/domain/usecases/fetch_user_use_case.dart';
+import 'package:gustosa/app/platforms/mobile/auth/domain/usecases/insert_agent_use_case.dart';
+import 'package:gustosa/app/platforms/mobile/auth/domain/usecases/update_user_use_case.dart';
+import 'package:gustosa/app/platforms/mobile/auth/presentation/bloc/agent_sign_up_bloc/bloc.dart';
 import 'package:gustosa/app/platforms/mobile/auth/presentation/bloc/auth_bloc/bloc.dart';
+import 'package:gustosa/app/platforms/mobile/home/presentation/bloc/home_bloc/bloc.dart';
+import 'package:gustosa/app/shared/config/constants/enums.dart';
+import 'package:gustosa/app/shared/config/routes/routes.dart';
+import 'package:gustosa/app/shared/core/backend_controller/auth_controller/auth_controller_impl.dart';
+import 'package:gustosa/app/shared/core/inject_dependency/dependencies.dart';
+import 'package:gustosa/app/shared/core/local_storage/local_storage.dart';
+import 'package:gustosa/app/shared/core/utils/toast_manager.dart';
 import 'package:intl/intl.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:toastification/toastification.dart';
-
-import '../../../../../../shared/config/constants/enums.dart';
-import '../../../../../../shared/config/routes/routes.dart';
-import '../../../../../../shared/core/backend_controller/auth_controller/auth_controller_impl.dart';
-import '../../../../../../shared/core/inject_dependency/dependencies.dart';
-import '../../../../../../shared/core/local_storage/local_storage.dart';
-import '../../../../../../shared/core/utils/toast_manager.dart';
-import '../../../domain/entities/agent_model.dart';
-import '../../../domain/entities/user_model.dart';
-import '../../../domain/usecases/fetch_user_use_case.dart';
-import '../../../domain/usecases/insert_agent_use_case.dart';
-import '../../../domain/usecases/update_user_use_case.dart';
-import '../agent_sign_up_bloc/bloc.dart';
 
 part 'events.dart';
 
@@ -201,11 +201,11 @@ class SignUpPageBloc extends Bloc<SignUpPageEvent, SignUpPageState> {
           countryCode: sl<AuthBloc>().selectedCountry!.dialCode,
           phoneNumber: !sl<AuthBloc>().isPhoneLogin
               ? emailOrPhoneController.text
-              .toLowerCase() // this is not email controller but rather email/phone controller
+              .toLowerCase()
               : sl<AuthBloc>().phoneController.text,
           email: sl<AuthBloc>().isPhoneLogin
               ? emailOrPhoneController.text
-              .toLowerCase() // this is not email controller but rather email/phone controller
+              .toLowerCase()
               : sl<AuthBloc>().email,
           dob: DateFormat('yyyy-mm-dd').format(birthDatePicker!),
           role: sl<HomePageBloc>().entity);
@@ -216,7 +216,7 @@ class SignUpPageBloc extends Bloc<SignUpPageEvent, SignUpPageState> {
         if (sl<HomePageBloc>().entity == Entity.agent) {
           final reference = FirebaseStorage.instance.ref().child(
               'agent_profiles/${AppLocalStorage.gustId}.${sl<AgentSignUpPageBloc>().agentImageExt}');
-          await reference.putData(sl<AgentSignUpPageBloc>().agentImage! as Uint8List);
+          await reference.putData(sl<AgentSignUpPageBloc>().agentImage!);
           final uri = await reference.getDownloadURL();
           AgentModel agent = AgentModel(
               agentWorkEmail: user.email,

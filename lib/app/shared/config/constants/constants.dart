@@ -2,10 +2,12 @@
 
 
 import 'package:flutter/cupertino.dart';
+import 'package:gustosa/app/shared/config/constants/enums.dart';
 
 const receiptRadarCoins = 20;
 const healthInsightsCoins = 10;
 
+Entity defaultEntity = Entity.user;
 
 class Constants {
   static const offlineAlert = "Please check your internet connection!";

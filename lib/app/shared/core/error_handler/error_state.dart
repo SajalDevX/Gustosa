@@ -3,7 +3,7 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 
-import '../../config/constants/enums.dart';
+import 'package:gustosa/app/shared/config/constants/enums.dart';
 
 abstract class ErrorState<T> {
   final Exception? clientError;

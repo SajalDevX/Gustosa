@@ -3,32 +3,33 @@ import 'dart:io';
 
 import 'package:equatable/equatable.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_countdown_timer/countdown_controller.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gustosa/app/platforms/mobile/auth/data/models/countriesModel.dart';
+import 'package:gustosa/app/platforms/mobile/auth/domain/entities/agent_model.dart';
+import 'package:gustosa/app/platforms/mobile/auth/domain/entities/user_model.dart';
+import 'package:gustosa/app/platforms/mobile/auth/domain/usecases/fetch_agents_use_case.dart';
+import 'package:gustosa/app/platforms/mobile/auth/domain/usecases/fetch_user_use_case.dart';
+import 'package:gustosa/app/platforms/mobile/auth/domain/usecases/insert_agent_use_case.dart';
+import 'package:gustosa/app/platforms/mobile/auth/domain/usecases/update_user_use_case.dart';
+import 'package:gustosa/app/platforms/mobile/auth/presentation/bloc/agent_sign_up_bloc/bloc.dart';
+import 'package:gustosa/app/platforms/mobile/home/presentation/bloc/home_bloc/bloc.dart';
+import 'package:gustosa/app/platforms/mobile/home/presentation/bloc/pages/agent_home.dart';
+import 'package:gustosa/app/shared/config/constants/constants.dart';
+import 'package:gustosa/app/shared/config/constants/country_masks.dart';
+import 'package:gustosa/app/shared/config/constants/enums.dart';
+import 'package:gustosa/app/shared/config/routes/routes.dart';
+import 'package:gustosa/app/shared/core/backend_controller/auth_controller/auth_controller_impl.dart';
+import 'package:gustosa/app/shared/core/inject_dependency/dependencies.dart';
 import 'package:gustosa/app/shared/core/local_storage/local_storage.dart';
+import 'package:gustosa/app/shared/core/utils/toast_manager.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:timer_count_down/timer_controller.dart';
 import 'package:toastification/toastification.dart';
-
-import '../../../../../../shared/config/constants/constants.dart';
-import '../../../../../../shared/config/constants/country_masks.dart';
-import '../../../../../../shared/config/constants/enums.dart';
-import '../../../../../../shared/config/routes/routes.dart';
-import '../../../../../../shared/core/backend_controller/auth_controller/auth_controller_impl.dart';
-import '../../../../../../shared/core/inject_dependency/dependencies.dart';
-import '../../../../../../shared/core/utils/toast_manager.dart';
-import '../../../data/models/countriesModel.dart';
-import '../../../domain/entities/agent_model.dart';
-import '../../../domain/entities/user_model.dart';
-import '../../../domain/usecases/fetch_agents_use_case.dart';
-import '../../../domain/usecases/fetch_user_use_case.dart';
-import '../../../domain/usecases/insert_agent_use_case.dart';
-import '../../../domain/usecases/update_user_use_case.dart';
 
 part 'events.dart';
 
@@ -74,7 +75,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   late TextInputFormatter formatter;
   String? email;
   int resendSeconds = 60;
-  CountdownController countdown = CountdownController();
+  CountdownController countdown = CountdownController(autoStart: false);
   int countDownForResendStartValue = 60;
   late Timer countDownForResend;
   bool resendValidation = false;
@@ -216,8 +217,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(InitializingState(event.isInitState));
     await resetSignUpPageBlocInstance();
     _countryList = countries;
-    await sl<HomePageBloc>().updateLocation();
-    selectedCountry = sl<HomePageBloc>().country;
     formatter = MaskTextInputFormatter(
       mask: countryMasks[selectedCountry!.code],
       filter: {"#": RegExp(r'[0-9]')},
@@ -474,11 +473,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         agentImage: uri,
         gustId: AppLocalStorage.gustId,
         agentName: sl<AgentSignUpPageBloc>().nameController.text,
-        agentBrand: sl<AgentSignUpPageBloc>().selectedBrand?.toJson(),
         agentLocation: sl<AgentSignUpPageBloc>().locationController.text,
         agentZipCode: sl<AgentSignUpPageBloc>().zipCodeController.text,
-        agentDomain: sl<AgentSignUpPageBloc>().selectedBrandDomain ??
-            event.email.split('@')[1],
         agentApprovalStatus: AgentApprovalStatus.approved);
     await insertAgentUseCase(agent: agent).then((value) async {
       AppLocalStorage.updateUser(

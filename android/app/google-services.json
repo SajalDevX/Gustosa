@@ -12,7 +12,20 @@
           "package_name": "com.example.gustosa"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "160374676664-2rvcn68lopm7n4ui7p67npqtc0s0jn89.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gustosa",
+            "certificate_hash": "9c49576e2e291ab14de4276d9bbb7edb01113b30"
+          }
+        },
+        {
+          "client_id": "160374676664-m61f7vq7cubc21k328fmpjtvq5r1ral6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAsVQk3Cf9HVfF9v3o_oeqoVr4VWn0-gpY"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "160374676664-m61f7vq7cubc21k328fmpjtvq5r1ral6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "160374676664-slvhdrm8rrkpf4cifdi1d841jfghbeil.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.gustosa"
+              }
+            }
+          ]
         }
       }
     }

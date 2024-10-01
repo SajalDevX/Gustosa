@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:nativewrappers/_internal/vm/lib/typed_data_patch.dart';
+import 'dart:typed_data';
 
 import 'package:equatable/equatable.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -26,7 +26,6 @@ class AgentSignUpPageBloc
 
   AgentSignUpPageBloc(this.updateAgentUseCase)
       : super(AgentSignUpPageInitialState()) {
-    on<FetchCategoriesEvent>(fetchCategoriesEvent);
     on<CaptureImageEvent>(captureImageEvent);
     on<UpdateAgentEvent>(updateAgentEvent);
   }
@@ -91,7 +90,7 @@ class AgentSignUpPageBloc
     if (agentImage != null) {
       final reference = FirebaseStorage.instance.ref().child(
           'agent_profiles/${const Uuid().v4()}.${sl<AgentSignUpPageBloc>().agentImageExt}');
-      await reference.putData(sl<AgentSignUpPageBloc>().agentImage);
+      await reference.putData(sl<AgentSignUpPageBloc>().agentImage as Uint8List);
       uri = await reference.getDownloadURL();
     }
     AgentModel agent = AppLocalStorage.agent!.copyWith(

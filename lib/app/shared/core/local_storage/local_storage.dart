@@ -68,4 +68,6 @@ class AppLocalStorage{
   static void updateUserOnboardingStatus(UserOnboardStatus status) {
     Hive.box(Boxes.other).put('user_onboard_status', status);
   }
+  static bool get isUserLoggedIn =>
+      user != null && userOnboardStatus == UserOnboardStatus.loggedIn;
 }

@@ -1,9 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gustosa/app/platforms/mobile/auth/domain/entities/user_keys.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../../../../shared/config/constants/enums.dart';
+import 'package:gustosa/app/shared/config/constants/enums.dart';
 
 part 'user_model.g.dart';
 

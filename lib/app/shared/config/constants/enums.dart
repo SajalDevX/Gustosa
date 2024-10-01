@@ -12,6 +12,8 @@ enum EmailProvider { google, outlook, yahoo }
 
 enum LoginMode { google, apple, phone }
 
+enum NfcOperation { read, write }
+enum CustomFormType { text, date, list, filter, duration, dateTime }
 
 @HiveType(typeId: 0)
 enum UserOnboardStatus {

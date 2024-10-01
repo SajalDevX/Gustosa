@@ -64,6 +64,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '160374676664',
     projectId: 'gustosa-66729',
     storageBucket: 'gustosa-66729.appspot.com',
+    androidClientId: '160374676664-2rvcn68lopm7n4ui7p67npqtc0s0jn89.apps.googleusercontent.com',
+    iosClientId: '160374676664-slvhdrm8rrkpf4cifdi1d841jfghbeil.apps.googleusercontent.com',
     iosBundleId: 'com.example.gustosa',
   );
 
@@ -73,6 +75,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '160374676664',
     projectId: 'gustosa-66729',
     storageBucket: 'gustosa-66729.appspot.com',
+    androidClientId: '160374676664-2rvcn68lopm7n4ui7p67npqtc0s0jn89.apps.googleusercontent.com',
+    iosClientId: '160374676664-slvhdrm8rrkpf4cifdi1d841jfghbeil.apps.googleusercontent.com',
     iosBundleId: 'com.example.gustosa',
   );
 
@@ -85,4 +89,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'gustosa-66729.appspot.com',
     measurementId: 'G-SQ25JNWHZF',
   );
+
 }
