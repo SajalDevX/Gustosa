@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../shared/core/inject_dependency/DependencyInjection.dart';
-import '../bloc/AuthBloc.dart';
-import '../bloc/AuthEvent.dart';
-import '../bloc/AuthState.dart';
+import '../../../../../shared/core/inject_dependency/dependencies.dart';
+import '../bloc/bloc.dart';
+import '../bloc/event.dart';
+import '../bloc/state.dart';
+
 
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});

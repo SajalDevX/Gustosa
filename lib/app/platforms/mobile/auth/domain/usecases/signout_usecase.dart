@@ -1,6 +1,6 @@
 import 'package:either_dart/either.dart';
-import 'package:gustosa/app/shared/core/error_handler/ErrorState.dart';
-import '../repository/AuthRepository.dart';
+import '../../../../../shared/core/error_handler/error_state.dart';
+import '../repository/supabase_auth_repository.dart';
 
 class SignOutUseCase {
   final AuthRepository authRepository;

@@ -1,9 +1,8 @@
 
 import 'package:either_dart/either.dart';
-import 'package:gustosa/app/platforms/mobile/auth/domain/entities/UserEntity.dart';
-
-import '../../../../../shared/core/error_handler/ErrorState.dart';
-import '../repository/AuthRepository.dart';
+import '../../../../../shared/core/error_handler/error_state.dart';
+import '../entities/user_entity.dart';
+import '../repository/supabase_auth_repository.dart';
 
 class GetCurrentUserUseCase {
   final AuthRepository repository;

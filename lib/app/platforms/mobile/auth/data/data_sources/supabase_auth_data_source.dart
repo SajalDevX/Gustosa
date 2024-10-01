@@ -1,5 +1,4 @@
-
-import '../../domain/entities/UserEntity.dart';
+import '../../domain/entities/user_entity.dart';
 
 abstract class AuthDataSource {
   Future<UserEntity?> signInWithEmail(String email, String password);

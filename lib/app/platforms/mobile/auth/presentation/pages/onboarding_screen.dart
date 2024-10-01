@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gustosa/app/platforms/mobile/auth/presentation/pages/AuthPage.dart';
+import 'package:gustosa/app/platforms/mobile/auth/presentation/pages/auth_page.dart';
 
-import '../components/ColoredButton.dart';
+import '../components/colored_button.dart';
+
 
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({super.key});

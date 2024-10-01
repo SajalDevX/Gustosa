@@ -1,9 +1,9 @@
 import 'package:either_dart/either.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../../../../../shared/core/error_handler/ErrorState.dart';
-import '../../domain/entities/UserEntity.dart';
-import '../../domain/repository/AuthRepository.dart';
-import '../data_sources/AuthDataSource.dart';
+import '../../../../../shared/core/error_handler/error_state.dart';
+import '../../domain/entities/user_entity.dart';
+import '../../domain/repository/supabase_auth_repository.dart';
+import '../data_sources/supabase_auth_data_source.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final AuthDataSource authDataSource;

@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart' as firebase;
-import '../../domain/entities/UserEntity.dart';
-import 'AuthDataSource.dart';
+import 'package:gustosa/app/platforms/mobile/auth/data/data_sources/supabase_auth_data_source.dart';
+import '../../domain/entities/user_entity.dart';
 
 class AuthDataSourceImpl implements AuthDataSource {
   final firebase.FirebaseAuth _firebaseAuth;

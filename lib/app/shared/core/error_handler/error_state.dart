@@ -2,8 +2,7 @@ import 'dart:developer';
 
 
 import 'package:dio/dio.dart';
-
-import '../../config/constants/Enums.dart';
+import '../../config/constants/enums.dart';
 
 abstract class ErrorState<T> {
   final Exception? clientError;
