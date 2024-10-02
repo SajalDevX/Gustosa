@@ -8,7 +8,7 @@ abstract class AuthController {
 
   Future<void> signInWithPhoneFirebase(String phoneNumber, BuildContext context);
 
-  Future<void> verifyPhoneFirebase(String verificationId, String otp);
+  Future<User?> verifyPhoneFirebase(String verificationId, String otp);
 
   Future<void> resendOtpFirebase(String phoneNumber, BuildContext context);
 

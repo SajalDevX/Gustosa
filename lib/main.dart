@@ -3,8 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:gustosa/app/platforms/mobile/auth/presentation/pages/onboarding_screen.dart';
-import 'app/platforms/mobile/auth/presentation/bloc/bloc.dart';
-import 'app/platforms/mobile/auth/presentation/bloc/event.dart';
+import 'app/platforms/mobile/auth/presentation/bloc/user_signup/bloc.dart';
+import 'app/platforms/mobile/auth/presentation/bloc/user_signup/event.dart';
 import 'app/shared/core/inject_dependency/dependencies.dart';
 
 void main() async {

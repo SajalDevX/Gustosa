@@ -69,6 +69,10 @@ dependencies:
   flutter_animate: ^4.5.0
   flutter_background_geolocation: ^4.16.0
   firebase_analytics: ^11.3.3
+  device_preview: ^1.2.0
+  wiredash: ^2.2.2
+  responsive_sizer: ^3.3.1
+  flutter_fgbg: ^0.6.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

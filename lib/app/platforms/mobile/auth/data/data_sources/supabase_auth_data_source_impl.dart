@@ -1,48 +1,65 @@
-import 'package:firebase_auth/firebase_auth.dart' as firebase;
 import 'package:gustosa/app/platforms/mobile/auth/data/data_sources/supabase_auth_data_source.dart';
+import 'package:gustosa/app/shared/config/constants/enums.dart';
+import '../../../../../shared/core/backend_controller/db_controller/db_tables.dart';
 import '../../domain/entities/user_entity.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-class AuthDataSourceImpl implements AuthDataSource {
-  final firebase.FirebaseAuth _firebaseAuth;
+class SupabaseAuthDataSourceImpl implements SupabaseAuthDataSource {
+  final supabase = Supabase.instance.client;
+  @override
+  Future<List<Map<String, dynamic>>> fetchUsers(
+      String? uid, String? email, String? phoneNumber) async {
+    final field = uid != null
+        ? 'uid'
+        : email != null
+        ? 'email'
+        : 'phoneNumber';
 
-  AuthDataSourceImpl(this._firebaseAuth);
+    final value = uid ?? email ?? phoneNumber;
 
-  Future<UserEntity?> signInWithEmail(String email, String password) async {
-    try {
-      final result = await _firebaseAuth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      return UserEntity(id: result.user!.uid, email: result.user!.email!);
-    } catch (e) {
-      return null;
-    }
+    final data =
+    await supabase.from(DbTables.usersTable).select().eq(field, value!);
+    return data;
   }
+  @override
+  Future<Map<String, dynamic>?> fetchUser(String? uid, String? email,
+      String? phoneNumber, AgentApprovalStatus? approvalStatus) async {
+    const agentApprovalStatusEnumMap = {
+      AgentApprovalStatus.approved: 'approved',
+      AgentApprovalStatus.pending: 'pending',
+      AgentApprovalStatus.denied: 'denied',
+    };
 
-  Future<void> signOut() async {
-    await _firebaseAuth.signOut();
-  }
+    final field = uid != null
+        ? 'gust_id'
+        : email != null
+            ? 'email'
+            : phoneNumber != null
+                ? 'phone_number'
+                : 'agent_approval_status';
 
-  Future<UserEntity?> getCurrentUser() async{
-    final firebaseUser = _firebaseAuth.currentUser;
-    if (firebaseUser != null) {
-      return UserEntity(id: firebaseUser.uid, email: firebaseUser.email!);
-    }
-    return null;
+    final value = uid ??
+        email ??
+        phoneNumber ??
+        agentApprovalStatusEnumMap[approvalStatus];
+    final data = await supabase
+        .from(DbTables.usersTable)
+        .select()
+        .eq(field, value!)
+        .limit(1);
+    return data.isEmpty ? null : data.first;
   }
 
   @override
-  Future<UserEntity?> signUpWithEmail(String email, String password) async {
-    try {
-      final result = await _firebaseAuth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      return UserEntity(id: result.user!.uid, email: result.user!.email!);
-    } catch (e) {
-      return null;
-    }
+  Future<void> insertUser(UserEntity userModel) async {
+    await supabase.from(DbTables.usersTable).insert(userModel.toJson());
   }
 
+  @override
+  Future<void> updateUser(UserEntity userModel, String uid) async {
+    await supabase
+        .from(DbTables.usersTable)
+        .update(userModel.toJson())
+        .match({'gust_id': uid});
+  }
 }
-
