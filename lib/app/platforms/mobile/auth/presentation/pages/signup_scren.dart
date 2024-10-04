@@ -11,8 +11,8 @@ class SignUpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => SignUpPageBloc(
-          sl<FetchUserUseCase>(),
-          sl<UpdateUserUseCase>()
+        sl<FetchUserUseCase>(),
+        sl<UpdateUserUseCase>(),
       ),
       child: Scaffold(
         appBar: AppBar(
@@ -20,40 +20,48 @@ class SignUpScreen extends StatelessWidget {
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: BlocBuilder<SignUpPageBloc, SignUpPageState>(
-            builder: (context, state) {
-              final bloc = context.read<SignUpPageBloc>();
-
-              return Column(
-                children: [
-                  TextField(
-                    controller: bloc.firstNameController,
-                    focusNode: bloc.firstNameFocusNode,
-                    decoration: InputDecoration(labelText: 'First Name'),
-                  ),
-                  TextField(
-                    controller: bloc.lastNameController,
-                    focusNode: bloc.lastNameFocusNode,
-                    decoration: InputDecoration(labelText: 'Last Name'),
-                  ),
-                  TextField(
-                    controller: bloc.emailOrPhoneController,
-                    focusNode: bloc.emailFocusNode,
-                    decoration: InputDecoration(labelText: 'Phone Number'),
-                  ),
-                  SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () {
-                      bloc.add(SignUpEvent(context));
-                    },
-                    child: Text("Complete Sign-Up"),
-                  ),
-                  if (state is SigningUpState) CircularProgressIndicator(),
-                  if (state is SigningUpErrorState)
-                    Text("An error occurred. Please try again."),
-                ],
-              );
+          child: BlocListener<SignUpPageBloc, SignUpPageState>(
+            listener: (context, state) {
+              if (state is OnNextPageState) {
+                // Navigate to the next screen
+                Navigator.pushNamed(context, '/home'); // Replace with your route
+              }
             },
+            child: BlocBuilder<SignUpPageBloc, SignUpPageState>(
+              builder: (context, state) {
+                final bloc = context.read<SignUpPageBloc>();
+
+                return Column(
+                  children: [
+                    TextField(
+                      controller: bloc.firstNameController,
+                      focusNode: bloc.firstNameFocusNode,
+                      decoration: InputDecoration(labelText: 'First Name'),
+                    ),
+                    TextField(
+                      controller: bloc.lastNameController,
+                      focusNode: bloc.lastNameFocusNode,
+                      decoration: InputDecoration(labelText: 'Last Name'),
+                    ),
+                    TextField(
+                      controller: bloc.emailOrPhoneController,
+                      focusNode: bloc.emailFocusNode,
+                      decoration: InputDecoration(labelText: 'Phone Number'),
+                    ),
+                    SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: () {
+                        bloc.add(SignUpEvent(context));
+                      },
+                      child: Text("Complete Sign-Up"),
+                    ),
+                    if (state is SigningUpState) CircularProgressIndicator(),
+                    if (state is SigningUpErrorState)
+                      Text("An error occurred. Please try again."),
+                  ],
+                );
+              },
+            ),
           ),
         ),
       ),

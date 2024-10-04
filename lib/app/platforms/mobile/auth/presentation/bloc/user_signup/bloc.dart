@@ -109,5 +109,6 @@ class SignUpPageBloc extends Bloc<SignUpPageEvent, SignUpPageState> {
     }
 
     onUserSignUp();
+    emit(OnNextPageState());
   }
 }
