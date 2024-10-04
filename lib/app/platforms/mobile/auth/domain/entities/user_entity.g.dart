@@ -75,13 +75,13 @@ UserEntity _$UserEntityFromJson(Map<String, dynamic> json) => UserEntity(
 
 Map<String, dynamic> _$UserEntityToJson(UserEntity instance) =>
     <String, dynamic>{
-      'gust_id': instance.gustId,
-      'first_name': instance.firstName,
-      'last_name': instance.lastName,
-      'phone_number': instance.phoneNumber,
-      'email_id': instance.email,
-      'avatar': instance.avatar,
-      'onboard_status': _$OnboardStatusEnumMap[instance.onboardStatus]!,
+      'gust_id': instance.gustId ?? '',
+      'first_name': instance.firstName ?? '',
+      'last_name': instance.lastName??'',
+      'phone_number': instance.phoneNumber??'',
+      'email_id': instance.email??'',
+      'avatar': instance.avatar??"",
+      'onboard_status': _$OnboardStatusEnumMap[instance.onboardStatus]??'',
     };
 
 const _$OnboardStatusEnumMap = {

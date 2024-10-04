@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:gustosa/app/platforms/mobile/auth/data/data_sources/supabase_auth_data_source.dart';
 import 'package:gustosa/app/shared/config/constants/enums.dart';
 import '../../../../../shared/core/backend_controller/db_controller/db_tables.dart';
@@ -33,7 +35,7 @@ class SupabaseAuthDataSourceImpl implements SupabaseAuthDataSource {
     final field = uid != null
         ? 'gust_id'
         : email != null
-            ? 'email'
+            ? 'email_id'
             : phoneNumber != null
                 ? 'phone_number'
                 : 'agent_approval_status';
@@ -47,6 +49,7 @@ class SupabaseAuthDataSourceImpl implements SupabaseAuthDataSource {
         .select()
         .eq(field, value!)
         .limit(1);
+
     return data.isEmpty ? null : data.first;
   }
 
@@ -54,6 +57,7 @@ class SupabaseAuthDataSourceImpl implements SupabaseAuthDataSource {
   Future<void> insertUser(UserEntity userModel) async {
     await supabase.from(DbTables.usersTable).insert(userModel.toJson());
   }
+
 
   @override
   Future<void> updateUser(UserEntity userModel, String uid) async {

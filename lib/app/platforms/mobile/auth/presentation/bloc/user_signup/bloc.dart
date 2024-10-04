@@ -88,14 +88,7 @@ class SignUpPageBloc extends Bloc<SignUpPageEvent, SignUpPageState> {
         return;
       }
     }
-    final result = await fetchUserUseCase(email: email);
-    result.fold((l) {}, (r) {
-      if (r != null) {
-        emit(SigningUpErrorState());
-        showToast("Email already exists!");
-        return;
-      }
-    });
+
     Future<void> onUserSignUp() async {
       final user = UserEntity(
         gustId: FirebaseAuth.instance.currentUser!.uid,

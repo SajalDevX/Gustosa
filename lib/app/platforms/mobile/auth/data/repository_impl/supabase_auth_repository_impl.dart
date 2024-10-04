@@ -15,15 +15,18 @@ class SupabaseAuthRepositoryImpl implements SupabaseAuthRepository {
       String? uid, String? email, String? phoneNumber, AgentApprovalStatus? approvalStatus) async {
     try {
       final result = await authDataSource.fetchUser(uid, email, phoneNumber, approvalStatus);
+      print("Raw result: $result"); // Add this to check the fetched data
       if (result != null) {
         return Right(UserEntity.fromJson(result));
       } else {
-        return Left(DataHttpError(HttpException.unknown));
+        return Left(DataHttpError(HttpException.error1));
       }
     } catch (e) {
-      return Left(DataHttpError(HttpException.unknown));
+      print("Error occurred: $e"); // Log the actual error message
+      return Left(DataHttpError(HttpException.error2));
     }
   }
+
 
   @override
   Future<Either<ErrorState, List<UserEntity>>> fetchUsers(
@@ -33,7 +36,7 @@ class SupabaseAuthRepositoryImpl implements SupabaseAuthRepository {
       final users = result.map<UserEntity>((e) => UserEntity.fromJson(e)).toList();
       return Right(users);
     } catch (e) {
-      return  Left(DataHttpError(HttpException.unknown));
+      return  Left(DataHttpError(HttpException.error3));
     }
   }
 
@@ -43,7 +46,7 @@ class SupabaseAuthRepositoryImpl implements SupabaseAuthRepository {
       await authDataSource.insertUser(user);
       return const Right(null);
     } catch (e) {
-      return Left(DataHttpError(HttpException.unknown));
+      return Left(DataHttpError(HttpException.error4));
     }
   }
 
@@ -53,7 +56,7 @@ class SupabaseAuthRepositoryImpl implements SupabaseAuthRepository {
       await authDataSource.updateUser(user, uid);
       return const Right(null);
     } catch (e) {
-      return Left(DataHttpError(HttpException.unknown));
+      return Left(DataHttpError(HttpException.error5));
     }
   }
 }
