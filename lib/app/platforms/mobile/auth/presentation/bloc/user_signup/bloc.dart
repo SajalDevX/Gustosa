@@ -92,6 +92,7 @@ class SignUpPageBloc extends Bloc<SignUpPageEvent, SignUpPageState> {
     Future<void> onUserSignUp() async {
       final user = UserEntity(
         gustId: FirebaseAuth.instance.currentUser!.uid,
+        email: FirebaseAuth.instance.currentUser!.email,
         onboardStatus: OnboardStatus.signed_up,
         firstName: firstName,
         lastName: lastName,

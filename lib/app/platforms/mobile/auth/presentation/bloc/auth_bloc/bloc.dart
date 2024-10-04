@@ -82,6 +82,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final googleAuth = await auth.signInWithGoogle();
       email = googleAuth.email;
       await insertUserUseCase(user: UserEntity(gustId: googleAuth.uid, onboardStatus: OnboardStatus.authenticated,email: googleAuth.email));
+      print("Email is : ${googleAuth.email}");
       final result = await fetchUserUseCase(email: googleAuth.email);
       result.fold((l) {}, (user) {
         if (user != null) {
