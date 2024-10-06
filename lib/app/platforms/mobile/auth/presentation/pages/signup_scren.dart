@@ -16,15 +16,14 @@ class SignUpScreen extends StatelessWidget {
       ),
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Complete Your Profile"),
+          title: const Text("Complete Your Profile"),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: BlocListener<SignUpPageBloc, SignUpPageState>(
             listener: (context, state) {
               if (state is OnNextPageState) {
-                // Navigate to the next screen
-                Navigator.pushNamed(context, '/home'); // Replace with your route
+                Navigator.pushNamed(context, '/home');
               }
             },
             child: BlocBuilder<SignUpPageBloc, SignUpPageState>(
@@ -36,28 +35,28 @@ class SignUpScreen extends StatelessWidget {
                     TextField(
                       controller: bloc.firstNameController,
                       focusNode: bloc.firstNameFocusNode,
-                      decoration: InputDecoration(labelText: 'First Name'),
+                      decoration: const InputDecoration(labelText: 'First Name'),
                     ),
                     TextField(
                       controller: bloc.lastNameController,
                       focusNode: bloc.lastNameFocusNode,
-                      decoration: InputDecoration(labelText: 'Last Name'),
+                      decoration: const InputDecoration(labelText: 'Last Name'),
                     ),
                     TextField(
                       controller: bloc.emailOrPhoneController,
                       focusNode: bloc.emailFocusNode,
-                      decoration: InputDecoration(labelText: 'Phone Number'),
+                      decoration: const InputDecoration(labelText: 'Phone Number'),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: () {
                         bloc.add(SignUpEvent(context));
                       },
-                      child: Text("Complete Sign-Up"),
+                      child: const Text("Complete Sign-Up"),
                     ),
-                    if (state is SigningUpState) CircularProgressIndicator(),
+                    if (state is SigningUpState) const CircularProgressIndicator(),
                     if (state is SigningUpErrorState)
-                      Text("An error occurred. Please try again."),
+                      const Text("An error occurred. Please try again."),
                   ],
                 );
               },

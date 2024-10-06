@@ -13,6 +13,13 @@ enum OnboardStatus {
   @HiveField(1)
   signed_up
 }
+@HiveType(typeId: 5)
+enum FoodType {
+  @HiveField(0)
+  veg,
+  @HiveField(1)
+  non_veg
+}
 
 @HiveType(typeId: 0)
 enum UserOnboardStatus {

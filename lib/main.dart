@@ -55,9 +55,9 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Auth Flow Example',
-        initialRoute: AppRoutes.splash, // Start with SplashScreen
+        initialRoute: AppRoutes.splash,
         routes: {
-          AppRoutes.splash: (context) => SplashScreen(),
+          AppRoutes.splash: (context) => OnBoardingScreen(),
           AppRoutes.initial: (context) => AuthScreen(),
           AppRoutes.userSignUp: (context) => SignUpScreen(),
           AppRoutes.home: (context) => HomeScreen(),
@@ -109,7 +109,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: CircularProgressIndicator(), // Splash screen with a loader
       ),

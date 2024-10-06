@@ -15,24 +15,24 @@ class ColoredButton extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           colors: [
-            Color(0xffe54d60),
-            Color(0xffa342ff),
+            Color(0xffE0055F),
+            Color(0xff2020ED),
           ],
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
         ),
-        borderRadius: BorderRadius.circular(27),
+        borderRadius: BorderRadius.circular(8),
       ),
       child: SizedBox(
         width: double.infinity,
-        height: 44,
+        height: 48,
         child: ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
             backgroundColor:
-            Colors.transparent, // Make the button background transparent
+            Colors.transparent,
             foregroundColor: Colors.white,
-            elevation: 0, // Remove shadow/elevation
+            elevation: 0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),

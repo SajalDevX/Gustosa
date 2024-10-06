@@ -47,7 +47,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   TextEditingController otpController = TextEditingController();
   FocusNode focusNode = FocusNode();
   var phoneNumberWithoutCountryCode = "";
-  Country? selectedCountry;
+  Country? selectedCountry= Country(
+    name: "India",
+    flag: "🇮🇳",
+    code: "IN",
+    dialCode: "91",
+    minLength: 10,
+    maxLength: 10,
+  );
   late TextInputFormatter formatter;
   String? email;
   int resendSeconds = 60;
@@ -58,7 +65,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   String? firebaseVerificationId;
 
   Timer? _countdownTimer;
-  static const int _countdownDuration = 60; // 60 seconds
+  static const int _countdownDuration = 60;
 
   void setVerificationId(String id) {
     firebaseVerificationId = id;

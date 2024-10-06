@@ -38,6 +38,10 @@ class UserEntity {
   @JsonKey(name: UserKeys.onBoardStatusKey)
   OnboardStatus onboardStatus;
 
+  @HiveField(8)
+  @JsonKey(name: UserKeys.foodPrefKey)
+  FoodType? foodType;
+
   UserEntity(
       {required this.gustId,
       this.firstName,
@@ -45,13 +49,12 @@ class UserEntity {
       this.email,
       this.phoneNumber,
       this.avatar,
+      this.foodType,
       required this.onboardStatus});
 
   String get name => "${firstName ?? ""} ${lastName ?? ""}".toUpperCase();
 
-
-  String get phoneNumberWithoutCountryCode =>
-      (phoneNumber ?? "");
+  String get phoneNumberWithoutCountryCode => (phoneNumber ?? "");
 
   Map<String, dynamic> toJson() => _$UserEntityToJson(this);
 
@@ -65,6 +68,7 @@ class UserEntity {
       String? email,
       String? phoneNumber,
       String? avatar,
+      FoodType? foodType,
       OnboardStatus? onboardStatus) {
     return UserEntity(
       gustId: gustId ?? this.gustId,
@@ -73,6 +77,7 @@ class UserEntity {
       email: email ?? this.email,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       avatar: avatar ?? this.avatar,
+      foodType: foodType ?? this.foodType,
       onboardStatus: onboardStatus ?? this.onboardStatus,
     );
   }

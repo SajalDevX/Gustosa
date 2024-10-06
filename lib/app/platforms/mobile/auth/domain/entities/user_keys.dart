@@ -6,6 +6,7 @@ class UserKeys{
   static const String lastNameKey="last_name";
   static const String phoneNumberKey="phone_number";
   static const String emailKey="email_id";
+  static const String foodPrefKey="food_pref";
   static const String onBoardStatusKey="onboard_status";
   static const String avatarKey="avatar";
   static const String dobKey="dob";

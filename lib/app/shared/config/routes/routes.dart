@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:gustosa/app/platforms/mobile/auth/presentation/pages/onboarding_screen.dart';
 
 class AppRoutes{
   static const String initial = '/';
@@ -11,6 +12,6 @@ class AppRoutes{
 }
 class NavigationManager{
   static final Map<String,WidgetBuilder> routes = {
-
+    '/splash':(context)=>OnBoardingScreen(),
   };
 }
