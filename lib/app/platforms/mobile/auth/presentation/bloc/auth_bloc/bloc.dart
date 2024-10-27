@@ -84,19 +84,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Future<void> _onSignInWithGoogle(
       AuthSignInWithGoogleRequested event, Emitter<AuthState> emit) async {
     try {
-      // Step 1: Initiate Google Sign-In (account selection)
       final googleUser = await auth.initiateGoogleSignIn();
       emit(AuthLoading());
       if (googleUser == null) {
-        // User closed the account selection dialog, no further action required
         emit(AuthInitial());
         return;
       }
 
-      // Step 2: Emit loading state now that account is selected and sign-in will proceed
-
-
-      // Step 3: Complete Google Sign-In (actual authentication)
       final firebaseUser = await auth.completeGoogleSignIn(googleUser);
       email = firebaseUser!.email;
 
@@ -110,12 +104,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       final result = await fetchUserUseCase(email: firebaseUser.email);
       result.fold(
-            (l) => emit(AuthError('Error fetching user data')),
+            (l) => emit(const AuthError('Error fetching user data')),
             (user) {
           if (user != null) {
             _navigateToSignUp(event.context, user: user);
           } else {
-            emit(AuthError('User not found'));
+            emit(const AuthError('User not found'));
           }
         },
       );

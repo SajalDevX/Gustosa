@@ -264,10 +264,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ],
               ),
             ),
-            // Loading indicator positioned in the center
             if (_isLoading) ...[
               Container(
-                color: Colors.black.withOpacity(0.5), // Dimmed background
+                color: Colors.black.withOpacity(0.5),
               ),
               const Center(
                 child: CustomProgressIndicator(),
