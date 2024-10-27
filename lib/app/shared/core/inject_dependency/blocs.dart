@@ -6,4 +6,8 @@ Future<void> injectBlocs() async {
     sl(),
     sl(),
   ));
+  sl.registerSingleton(SignUpPageBloc(
+    sl(),
+    sl(),
+  ));
 }

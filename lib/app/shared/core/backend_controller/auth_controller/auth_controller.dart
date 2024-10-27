@@ -1,12 +1,14 @@
 part of 'auth_controller_impl.dart';
 
 abstract class AuthController {
-
   User? get firebaseCurrentUser;
 
-  Future<User> signInWithGoogle();
+  Future<User?> completeGoogleSignIn(GoogleSignInAccount googleUser);
 
-  Future<void> signInWithPhoneFirebase(String phoneNumber, BuildContext context);
+  Future<GoogleSignInAccount?> initiateGoogleSignIn();
+
+  Future<void> signInWithPhoneFirebase(
+      String phoneNumber, BuildContext context);
 
   Future<User?> verifyPhoneFirebase(String verificationId, String otp);
 

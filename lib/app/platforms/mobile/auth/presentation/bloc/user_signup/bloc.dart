@@ -4,6 +4,8 @@ import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:gustosa/app/platforms/mobile/auth/domain/entities/user_entity.dart';
 import 'package:gustosa/app/platforms/mobile/auth/presentation/bloc/auth_bloc/bloc.dart';
@@ -45,8 +47,7 @@ class SignUpPageBloc extends Bloc<SignUpPageEvent, SignUpPageState> {
       OnBackPressedEvent event, Emitter<SignUpPageState> emit) async {
     await auth.signOut();
     await GoogleSignIn().signOut();
-    Navigator.pushNamedAndRemoveUntil(
-        event.context, AppRoutes.mainAuth, (route) => false);
+    Get.toNamed(AppRoutes.welcomeScreen);
   }
 
   FutureOr<void> signUpEvent(
@@ -61,6 +62,8 @@ class SignUpPageBloc extends Bloc<SignUpPageEvent, SignUpPageState> {
     final String firstName = firstNameController.text;
     final String lastName = lastNameController.text;
     final String email = emailOrPhoneController.text;
+    const bool isVeg = true;
+    const FoodType foodType = isVeg ? FoodType.veg : FoodType.non_veg;
 
     if (firstName.isEmpty) {
       emit(SigningUpErrorState());
@@ -96,6 +99,7 @@ class SignUpPageBloc extends Bloc<SignUpPageEvent, SignUpPageState> {
         onboardStatus: OnboardStatus.signed_up,
         firstName: firstName,
         lastName: lastName,
+        foodType:foodType,
         phoneNumber: !sl<AuthBloc>().isPhoneLogin
             ? emailOrPhoneController.text.toLowerCase()
             : sl<AuthBloc>().phoneController.text,

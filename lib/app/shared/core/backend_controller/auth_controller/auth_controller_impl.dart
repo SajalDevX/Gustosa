@@ -21,27 +21,27 @@ class AuthControllerImpl extends AuthController {
   }
 
   @override
-  Future<User> signInWithGoogle() async {
+  Future<GoogleSignInAccount?> initiateGoogleSignIn() async {
     final GoogleSignIn googleSignIn = GoogleSignIn();
-
-    final value = await googleSignIn.isSignedIn();
-    if (value) {
+    if (await googleSignIn.isSignedIn()) {
       await googleSignIn.signOut();
     }
     final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+    if (googleUser != null) {
+      return googleUser;
+    }
+    return null;
+  }
 
-    final GoogleSignInAuthentication googleAuth =
-        await googleUser!.authentication;
-
+  @override
+  Future<User?> completeGoogleSignIn(GoogleSignInAccount googleUser) async {
+    final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
     final AuthCredential credential = GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
     );
-
-    final UserCredential firebaseUser =
-        await _firebaseAuth.signInWithCredential(credential);
-
-    return firebaseUser.user!;
+    final UserCredential firebaseUser = await _firebaseAuth.signInWithCredential(credential);
+    return firebaseUser.user;
   }
 
   @override

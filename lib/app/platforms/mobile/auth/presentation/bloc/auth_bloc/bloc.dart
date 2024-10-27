@@ -4,10 +4,10 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:gustosa/app/platforms/mobile/auth/domain/entities/user_entity.dart';
 import 'package:gustosa/app/platforms/mobile/auth/domain/usecases/insert_user_use_case.dart';
-import 'package:sms_autofill/sms_autofill.dart';
 import 'package:timer_count_down/timer_controller.dart';
 import '../../../../../../shared/config/constants/enums.dart';
 import '../../../../../../shared/config/routes/routes.dart';
@@ -41,13 +41,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   final auth = sl<AuthController>();
   bool exitApp = false;
-  late List<Country> _countryList;
   late List<Country> filteredCountries;
   TextEditingController phoneController = TextEditingController();
   TextEditingController otpController = TextEditingController();
   FocusNode focusNode = FocusNode();
   var phoneNumberWithoutCountryCode = "";
-  Country? selectedCountry= Country(
+  Country? selectedCountry = const Country(
     name: "India",
     flag: "🇮🇳",
     code: "IN",
@@ -84,23 +83,49 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   Future<void> _onSignInWithGoogle(
       AuthSignInWithGoogleRequested event, Emitter<AuthState> emit) async {
-    emit(AuthLoading());
     try {
-      final googleAuth = await auth.signInWithGoogle();
-      email = googleAuth.email;
-      await insertUserUseCase(user: UserEntity(gustId: googleAuth.uid, onboardStatus: OnboardStatus.authenticated,email: googleAuth.email));
-      print("Email is : ${googleAuth.email}");
-      final result = await fetchUserUseCase(email: googleAuth.email);
-      result.fold((l) {}, (user) {
-        if (user != null) {
-          _navigateToSignUp(event.context, user: user);
-        }
-      });
+      // Step 1: Initiate Google Sign-In (account selection)
+      final googleUser = await auth.initiateGoogleSignIn();
+      emit(AuthLoading());
+      if (googleUser == null) {
+        // User closed the account selection dialog, no further action required
+        emit(AuthInitial());
+        return;
+      }
+
+      // Step 2: Emit loading state now that account is selected and sign-in will proceed
+
+
+      // Step 3: Complete Google Sign-In (actual authentication)
+      final firebaseUser = await auth.completeGoogleSignIn(googleUser);
+      email = firebaseUser!.email;
+
+      await insertUserUseCase(
+        user: UserEntity(
+          gustId: firebaseUser.uid,
+          onboardStatus: OnboardStatus.authenticated,
+          email: firebaseUser.email,
+        ),
+      );
+
+      final result = await fetchUserUseCase(email: firebaseUser.email);
+      result.fold(
+            (l) => emit(AuthError('Error fetching user data')),
+            (user) {
+          if (user != null) {
+            _navigateToSignUp(event.context, user: user);
+          } else {
+            emit(AuthError('User not found'));
+          }
+        },
+      );
+
+      emit(AuthenticationCompleteWithGoogleState());
     } catch (e) {
       emit(AuthError(e.toString()));
     }
-    emit(AuthenticationCompleteWithGoogleState());
   }
+
 
   Future<void> _onSignInWithPhoneRequested(
       AuthSignInWithPhoneRequested event, Emitter<AuthState> emit) async {
@@ -117,8 +142,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       AuthVerifyPhoneRequested event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
     try {
-      final phoneAuth = await auth.verifyPhoneFirebase(firebaseVerificationId!, event.otp);
-      await insertUserUseCase(user: UserEntity(gustId: phoneAuth!.uid, onboardStatus: OnboardStatus.authenticated,phoneNumber: phoneAuth.phoneNumber));
+      final phoneAuth =
+          await auth.verifyPhoneFirebase(firebaseVerificationId!, event.otp);
+      await insertUserUseCase(
+          user: UserEntity(
+              gustId: phoneAuth!.uid,
+              onboardStatus: OnboardStatus.authenticated,
+              phoneNumber: phoneAuth.phoneNumber));
       final result = await fetchUserUseCase(phoneNumber: phoneAuth.phoneNumber);
       result.fold((l) {}, (user) {
         if (user != null) {
@@ -165,7 +195,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     if (isNewUser) {
       AppLocalStorage.updateUserOnboardingStatus(UserOnboardStatus.signUpForm);
-      Navigator.pushNamed(context, AppRoutes.userSignUp);
+      Get.toNamed(AppRoutes.authUserDetails);
       return;
     }
     AppLocalStorage.updateGustId(user.gustId!);
@@ -178,12 +208,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
               UserOnboardStatus.loggedIn);
           AppLocalStorage.updateUser(user);
 
-            Navigator.pushReplacementNamed(context, AppRoutes.home);
-
+          Get.toNamed(AppRoutes.home);
         } else {
           AppLocalStorage.updateUserOnboardingStatus(
               UserOnboardStatus.signUpForm);
-          Navigator.pushNamed(context, AppRoutes.userSignUp);
+          Get.toNamed(AppRoutes.authUserDetails);
         }
       },
     );

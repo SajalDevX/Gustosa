@@ -1,17 +1,7 @@
-import 'package:flutter/cupertino.dart';
-import 'package:gustosa/app/platforms/mobile/auth/presentation/pages/onboarding_screen.dart';
 
 class AppRoutes{
-  static const String initial = '/';
   static const String splash = '/splash';
-  static const String userSignUp = '/user-sign-up';
-  static const String emailVerification = '/email-verification';
-  static const String otpVerification = '/otp-verification';
+  static const String welcomeScreen = '/welcomeScreen';
   static const String home = '/home';
-  static const String mainAuth = '/main-auth';
-}
-class NavigationManager{
-  static final Map<String,WidgetBuilder> routes = {
-    '/splash':(context)=>OnBoardingScreen(),
-  };
+  static const String authUserDetails = '/authUserDetails';
 }
